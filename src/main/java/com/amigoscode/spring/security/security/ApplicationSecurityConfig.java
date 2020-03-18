@@ -25,7 +25,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //super.configure(http);
         http
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*")
@@ -39,7 +38,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-//        return super.userDetailsService();
         UserDetails std1 = User.builder()
                     .username("student1")
                     .password(passwordEncoder.encode("pass"))
