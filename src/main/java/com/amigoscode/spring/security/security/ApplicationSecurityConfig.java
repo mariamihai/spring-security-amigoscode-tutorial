@@ -50,19 +50,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails annaUser = User.builder()
                     .username("anna")
                     .password(passwordEncoder.encode("pass"))
-                    .roles(STUDENT.name()) // ROLE_STUDENT
+//                    .roles(STUDENT.name()) // ROLE_STUDENT
+                    .authorities(STUDENT.getGrantedAuthorities())
                 .build();
 
         UserDetails steveUser = User.builder()
-                .username("steve")
-                .password(passwordEncoder.encode("pass012"))
-                .roles(ADMIN.name()) // ROLE_ADMIN
+                    .username("steve")
+                    .password(passwordEncoder.encode("pass012"))
+    //                .roles(ADMIN.name()) // ROLE_ADMIN
+                    .authorities(ADMIN.getGrantedAuthorities())
                 .build();
 
         UserDetails tomUser = User.builder()
-                .username("tom")
-                .password(passwordEncoder.encode("pass012"))
-                .roles(ADMINTRAINEE.name()) // ROLE_ADMINTRAINEE
+                    .username("tom")
+                    .password(passwordEncoder.encode("pass012"))
+//                    .roles(ADMINTRAINEE.name()) // ROLE_ADMINTRAINEE
+                    .authorities(ADMINTRAINEE.getGrantedAuthorities())
                 .build();
 
         return new InMemoryUserDetailsManager(annaUser, steveUser, tomUser);
