@@ -52,6 +52,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .logout()
                     .logoutUrl("/logout") // default
+                    // should be changed to POST when csrf is enabled
+                    // best practice - POST request
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout", HttpMethod.GET.name()))
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
