@@ -45,10 +45,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin() // Form based Auth to be used
                     .loginPage("/login").permitAll()
                     .defaultSuccessUrl("/courses", true)
+                    .usernameParameter("username")
+                    .passwordParameter("password")
             .and()
                 .rememberMe()
                     .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
                     .key("thisisahiddenkey")
+                    .rememberMeParameter("remember-me")
             .and()
                 .logout()
                     .logoutUrl("/logout") // default
