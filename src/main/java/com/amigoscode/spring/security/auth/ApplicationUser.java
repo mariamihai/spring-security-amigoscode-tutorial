@@ -32,6 +32,12 @@ public class ApplicationUser implements UserDetails {
         this.enabled = enabled;
     }
 
+    public ApplicationUser (String username,
+                            String password,
+                            Set<? extends GrantedAuthority> grantedAuthorities) {
+        this(username, password, grantedAuthorities, true, true, true, true);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;
