@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.amigoscode.spring.security.security.ApplicationUserRole.*;
 
 @Configuration
@@ -41,7 +43,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin() // Form based Auth to be used
                 .loginPage("/login").permitAll().defaultSuccessUrl("/courses", true)
             .and()
-                .rememberMe();
+                .rememberMe()
+                .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
+                .key("thisisahiddenkey");
     }
 
     @Override
