@@ -1,6 +1,7 @@
 package com.amigoscode.spring.security.security;
 
 import com.amigoscode.spring.security.auth.ApplicationUserService;
+import com.amigoscode.spring.security.jwt.JwtTokenVerifier;
 import com.amigoscode.spring.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.context.annotation.Bean;
@@ -37,6 +38,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+                .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/api/**").hasRole(STUDENT.name())
